@@ -24,8 +24,8 @@ class PictureResponseBot:
         dp.add_handler(CommandHandler(config.COMMAND_NAME, self.send_picture_from_command))
         dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, self.respond_to_new_members))
         updater.start_polling()
-        updater.idle()
         logging.info("bot is running")
+        updater.idle()
 
     @bot_send_picture
     @call_and_log
