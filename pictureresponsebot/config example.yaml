@@ -1,0 +1,10 @@
+---
+bot_token: "Your token here"
+
+new_user_reply: "{new_member_names}: Hi! Welcome to {chat_name}. Enjoy a complimentary image, on the house."
+command_reply: "Enjoy this image, friend"
+
+command_name: "/commandstring (change this to what you want your user to call)"
+
+image_directory: "pictureresponsebot/assets/"
+image_name: "Your image filename here"
