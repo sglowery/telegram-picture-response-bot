@@ -19,10 +19,10 @@ def call_and_log(func: Callable) -> Callable:
 def bot_send_picture(func: Callable) -> Callable:
     def _wrapped(*args, **kwargs) -> NoReturn:
         payload: Dict[str, Any] = func(*args, **kwargs)
-        send_photo_args: Dict[str, Any] = {**payload,
-                                           'photo': payload['image_bytes']
-                                           }
-        Bot.send_photo(**send_photo_args)
+        with open(payload.pop('image_path'), 'rb') as f:
+            send_photo_args: Dict[str, Any] = {**payload,
+                                               'photo': f}
+            Bot.send_photo(**send_photo_args)
     return _wrapped
 
 

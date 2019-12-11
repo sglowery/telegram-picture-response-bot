@@ -67,7 +67,7 @@ class PictureResponseBot:
                 'chat_id': chat_id,
                 'caption': caption,
                 'reply_id': reply_id,
-                'image_bytes': open(self.image_path, 'rb')}
+                'image_path': self.image_path}
 
     def _get_welcome_message(self, message: Message) -> str:
         human_users: List[User] = self._get_human_users(message.new_chat_members)
