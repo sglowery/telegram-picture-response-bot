@@ -48,7 +48,6 @@ class PictureResponseBot:
                               port=port,
                               url_path=self.token)
         updater.bot.setWebhook(f"https://{self.heroku_app_name}.herokuapp.com/{self.token}")
-        # updater.start_polling()
         logging.info("bot is running")
         updater.idle()
 
