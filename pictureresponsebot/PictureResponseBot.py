@@ -39,15 +39,16 @@ class PictureResponseBot:
             self.run()
 
     def run(self):
-        updater = Updater(self.token, use_context=True)
+        updater = Updater(self.token)
         dp = updater.dispatcher
         dp.add_handler(CommandHandler(self.command_name, self._send_picture_from_command))
         dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, self._respond_to_new_members))
-        port = int(os.environ.get('PORT', '5000'))
-        updater.start_webhook(listen="0.0.0.0",
-                              port=port,
-                              url_path=self.token)
-        updater.bot.setWebhook(f"https://{self.heroku_app_name}.herokuapp.com/{self.token}")
+        # port = int(os.environ.get('PORT', '5000'))
+        # updater.start_webhook(listen="0.0.0.0",
+        #                       port=port,
+        #                       url_path=self.token)
+        # updater.bot.setWebhook(f"https://{self.heroku_app_name}.herokuapp.com/{self.token}")
+        updater.start_polling()
         logging.info("bot is running")
         updater.idle()
 
@@ -74,11 +75,10 @@ class PictureResponseBot:
                                   chat_id: int,
                                   caption: str,
                                   reply_id: int = None) -> TelegramMessageArgs:
-        return {'self':       from_bot,
-                'chat_id':    chat_id,
-                'caption':    caption,
-                'reply_id':   reply_id,
-                'image_path': self.image_path}
+        return {'self':                from_bot,
+                'chat_id':             chat_id,
+                'caption':             caption,
+                'reply_to_message_id': reply_id}
 
     def _get_welcome_message(self, message: Message) -> Optional[str]:
         human_users: List[User] = self._get_human_users(message.new_chat_members)

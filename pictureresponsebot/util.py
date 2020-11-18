@@ -19,7 +19,7 @@ def call_and_log(func: Callable) -> Callable:
     return _wrapped
 
 
-def bot_send_picture(func: Callable[[Any], Optional[TelegramMessageArgs]]) -> Callable:
+def bot_send_picture(func: Callable) -> Callable:
     def _wrapped(*args, **kwargs) -> NoReturn:
         payload = func(*args, **kwargs)
         if payload:
