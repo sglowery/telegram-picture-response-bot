@@ -43,9 +43,9 @@ class PictureResponseBot:
         dp = updater.dispatcher
         dp.add_handler(CommandHandler(self.command_name, self._send_picture_from_command))
         dp.add_handler(MessageHandler(Filters.status_update.new_chat_members, self._respond_to_new_members))
-        port = int(os.environ.get('PORT', '5000'))
+        # port = int(os.environ.get('PORT', '5000'))
         updater.start_webhook(listen="0.0.0.0",
-                              port=port,
+                              port=8443,
                               url_path=self.token)
         updater.bot.setWebhook(f"https://{self.heroku_app_name}.herokuapp.com/{self.token}")
         logging.info("bot is running")
